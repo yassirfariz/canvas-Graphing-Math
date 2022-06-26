@@ -121,7 +121,7 @@ class Fonction{
         ctx.stroke();
     }
     dx(f){
-      let a = f(4)-f(3)/(4-3)
+      let a = f(2)-f(1)/(2-1)
       return a
     }
     c(f){
@@ -129,9 +129,9 @@ class Fonction{
         return c;
     }
     getIntersection(f){
-        let x = this.c(f)-this.c(this.f)/this.dx(this.f)-this.dx(f)
+        let x = this.c(f)+this.c(this.f)/this.dx(this.f)+this.dx(f)
         let y = f(x);
-        return new Point(x,y);
+        return new Point(-x,-y);
     }
 }
 const canvas = document.getElementById('canvas');

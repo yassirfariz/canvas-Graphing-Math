@@ -1,5 +1,5 @@
-let f = (x)=>{return 3*x-1}
-let g = (x)=>{return 2*x-2}
+let f = (x)=>{return x**2-1}
+let g = (x)=>{return x-1}
 function animate(){
     canvas.height = innerHeight
     canvas.width = innerWidth
@@ -14,7 +14,7 @@ function animate(){
     var gs = new Fonction(g,-2,2);
     fonction.draw(ctx,unit,centerX,centerY);
     gs.draw(ctx,unit,centerX,centerY);
-    var pts = fonction.getIntersection(g);
+    var pts = gs.getIntersection(f);
     pts.draw(centerX,centerY,unit);
     requestAnimationFrame(animate);
 }
