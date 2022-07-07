@@ -69,7 +69,7 @@ class Point{
     }
     draw(centerX,centerY,u){
         ctx.beginPath();
-        ctx.arc(centerX+this.x*u,centerY+this.y*-u,5,0,2*Math.PI)
+        ctx.arc(centerX+this.x*u,centerY+this.y*-u,3.5,0,2*Math.PI)
         ctx.fill();
     }
 }
@@ -108,20 +108,21 @@ class Gradiations{
 class Fonction{
     constructor(f,xmin,xmax){
         this.f = f;
+        this.fx = (x) => {return f(x)-2*this.f(0)}
         this.xmin = xmin;
         this.xmax = xmax;
     }
     draw(ctx,u,centerX,centerY){
         ctx.beginPath();
-        for (let i=this.xmin;i<=this.xmax;i+=0.05/u){
+        for (let i=this.xmin;i<=this.xmax;i+=0.01/u){
             ctx.lineWidth = 2;
-            ctx.moveTo(i*u+centerX,centerY+this.f(-(i-0.05/u))*u);
-            ctx.lineTo(i*u+centerX,centerY+this.f(-i)*u);
+            ctx.moveTo(i*u+centerX,centerY+this.fx(-(i-0.01/u))*u);
+            ctx.lineTo(i*u+centerX,centerY+this.fx(-i)*u);
         }
         ctx.stroke();
     }
     dx(f){
-      let a = f(2)-f(1)/(2-1)
+      let a = f(2)-f(1)/1
       return a
     }
     c(f){
@@ -129,11 +130,11 @@ class Fonction{
         return c;
     }
     getIntersection(f){
-        let x = this.c(f)+this.c(this.f)/this.dx(this.f)+this.dx(f)
-        let y = f(x);
-        return new Point(-x,-y);
+        let x = (this.dx(f)-this.dx(this.f))/(this.c(this.f)-this.c(f));
+        let y = this.f(x**-1);
+        return new Point(x**-1,y);
     }
 }
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const scales = [25,30,50,65,70,85,100,125];
+const scales = [20,25,20,25,65,85,100];
