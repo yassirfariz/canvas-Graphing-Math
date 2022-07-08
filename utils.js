@@ -48,6 +48,11 @@ class Vector{
         this.pointB.y = this.y;
         return this;
     }
+    getCenterPoint(){
+        let x = (this.pointA.x + this.pointB.x)/2
+        let y = (this.pointA.y + this.pointB.y)/2
+        return new Point(x,y)
+    }
     draw(ctx,u){
         let yinvert = -1
         ctx.beginPath();  
@@ -137,4 +142,4 @@ class Fonction{
 }
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const scales = [20,25,20,25,65,85,100];
+const scales = [20,30,40,50,60,80,90,100];
